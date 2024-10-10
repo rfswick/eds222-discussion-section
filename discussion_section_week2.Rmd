@@ -1,0 +1,31 @@
+---
+title: "EDS 222 - Discussion Section - Week 2"
+author: "Rachel Swick"
+date: "2024-10-08"
+output: html_document
+---
+
+# Law of Large Numbers
+
+```{r}
+# load libraries
+library(tidyverse)
+```
+
+```{r, 11n2, eecho = F, fig.height=4.8}
+set.seed(1234) # ensures when you run code you get the same result
+
+lln_norm <- tibble( # basically a new name for a data frame
+  n_sz = sample(5:500, 1e4, replace = TRUE), # building variable by sampling between 5 and 500, taking 10000 samples
+  sample_mean = sapply(n_sz, function(n) mean(rnorm(n))) # sapply is running a for loop to take the sample mean of the normal distribution for every row of our sample
+) 
+
+ggplot(data = lln_norm) +
+  geom_point(aes(x = n_sz, y = sample_mean), alpha = 0.25, shape = 20) +
+  geom_hline(yintercept = 0,
+             color = "cyan4") +
+  labs(x = "Sample size",
+       y = "Sample mean") +
+  theme_bw()
+```
+
