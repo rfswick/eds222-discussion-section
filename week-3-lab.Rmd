@@ -137,7 +137,7 @@ summary(lm(hwy ~ year_fct, mpg))
 
 4.  Does your model suggest anything about whether fuel efficiency has evolved over time? Why or why not?
 
-**Answer:**
+**Answer: It suggests that is has not changed much over time.**
 
 # Section 2: Multiple Linear Regressions
 
@@ -152,7 +152,8 @@ As we showed in class, scatter plots are useful with numeric variables. The engi
 **Answers:**
 
 ```{r}
-
+ggplot(mpg, aes(displ, hwy)) +
+  geom_point(aes(color = year_fct))
 ```
 
 While we know that fuel economy evolved over time but how did that really happen? Can the credit for better efficiency over time be given to developments in engineering? Or did consumer tastes change? How do we know that the increase in fuel economy was not just due to the cars in 2008 generally having different sized engines than cars in 1999? This problem might seem confusing but it a multiple variable regression can help us unpack it.
@@ -172,7 +173,8 @@ Complete the following:
 **Answer:**
 
 ```{r}
-
+# will only ever have one tilda (~)
+summary(lm(hwy ~ year_fct + displ, mpg))
 ```
 
 2.  Interpret your three coefficients, paying careful attention to units.
@@ -192,7 +194,12 @@ This regression includes one "slope" coefficient (coefficient estimate on a nume
 **Answer:**
 
 ```{r}
+hwy_lm <- lm(hwy ~ year_fct + displ, mpg)
+augment(hwy_lm)
 
+ggplot(mpg, aes(displ, hwy, color = year_fct)) +
+  geom_point() +
+  geom_line(aes(y = .fitted), augment(hwy_lm))
 ```
 
 2.  Second, add two regression lines to the plot, one that shows the predicted relationship between miles per gallon and engine size for the 1999 vintage, and a second that shows the same predicted relationship but for the 2008 vintage.[^1]
