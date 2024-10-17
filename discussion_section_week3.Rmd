@@ -1,0 +1,35 @@
+---
+title: "Discussion Section week 3"
+author: "Rachel Swick"
+date: "2024-10-15"
+output: html_document
+---
+```{r}
+library(tidyverse)
+library()
+```
+
+
+```{r}
+N <- 100
+x1 <- rnorm(N)
+x2 <- rnorm(N) # No longer coorelated
+```
+
+
+```{r}
+# Choose our parameters
+beta0 <- 5
+beta1 <- 1.5
+beta2 <- -0.5
+sigma <- 2
+```
+
+```{r}
+# simulate y
+y <- beta0 + beta1 * x1 + beta2 * x2 + rnorm(N, sd = sigma)
+
+dat <- tibble(y, x1, x2)
+
+```
+
