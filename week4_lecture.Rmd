@@ -1,0 +1,22 @@
+---
+title: "Week 4 Lecture"
+author: "Rachel Swick"
+date: "2024-10-22"
+output: html_document
+editor_options: 
+  chunk_output_type: inline
+---
+
+```{r}
+library(palmerpenguins)
+library(tidyverse)
+```
+
+```{r}
+summary(lm(bill_length_mm ~ body_mass_g + species + body_mass_g : species, penguins))
+```
+
+```{r}
+summary(lm(bill_length_mm ~ body_mass_g + species + body_mass_g : bill_length_mm, penguins))
+```
+
